@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ .Release.Name }}-app
+  name: {{ include "my-app.fullname" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       labels:
-        app: {{ .Release.Name }}
+        {{ include "my-app.labels" . }}
     spec:
       containers:
         - name: app
